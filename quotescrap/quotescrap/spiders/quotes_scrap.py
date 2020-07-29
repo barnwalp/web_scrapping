@@ -47,3 +47,21 @@ class QuoteSpider(scrapy.Spider):
             # of that request is donwloaded; callback func will be called with
             # the downloaded response object as its first argument
             yield scrapy.Request(next_page, callback=self.parse)
+
+        """
+        # There is another way to generate requests for the consecutive pages
+        # by using response.follow instead of scrapy.Request. unlike scrapy.
+        # Request, response.follow supports relative urls directly, however
+        # response.follow just return a Request instance; you still have to
+        # yield this results. You can also pass the whole anchor tags,
+        # response.follow uses their href attribute automatically
+
+        for a in response.css('ul.pager a'):
+            yield response.follow(a, callback=self.parse)
+
+        # to create multiple requests for an iterable, you can use
+        anchors = response.css('ul.pager a')
+        yield from response.follow_all(anchors, callback=self.parse)
+
+        # or shortning it further
+        yield from response.follow_all(css='ul.pager a', callback=self.parses)
