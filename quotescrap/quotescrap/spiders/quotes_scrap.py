@@ -18,8 +18,8 @@ class QuoteSpider(scrapy.Spider):
 
     def start_requests(self):
         urls = [
-            'http://quote.toscrape.com/page/1',
-            'http://quote.toscrape.com/page/2,
+            'http://quotes.toscrape.com/page/1',
+            'http://quotes.toscrape.com/page/2,
             ]
         for url in urls:
             yield scrapy.Request(url=url, callback=self.parse)
@@ -30,7 +30,7 @@ class QuoteSpider(scrapy.Spider):
     # holds the page content. it parses the response.
     def parse(self, response):
         for quote in response.css('.row .col-md-8 .quote'):
-            # presence of yield in a function turns it into a generator; unlike
+            # presence of yield kn a function turns it into a generator; unlike
             # a normal function, generator only runs in response to iteration
             yield{
                 'post': quote.css('span.text::text').get(),
@@ -65,3 +65,4 @@ class QuoteSpider(scrapy.Spider):
 
         # or shortning it further
         yield from response.follow_all(css='ul.pager a', callback=self.parses)
+        """
