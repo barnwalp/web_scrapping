@@ -16,6 +16,8 @@ class NtSchool(scrapy.Spider):
 
     def parse_json(self, response):
         raw_json = response.body
+        nl = "\n"
+        print(f'Printing raw_json data: {nl}{raw_json}')
         data = json.loads(raw_json)
 
         for school in data:
