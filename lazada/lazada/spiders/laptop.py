@@ -1,18 +1,18 @@
 import scrapy
+from scrapy_splash import SplashRequest
 
 
-class LaptopSpider(scrapy.Spider):
-    name = 'laptop'
-    # start_urls = ['https://www.zillow.com/homes/Brownsville,-TX_rb/']
+class BeerSpider(scrapy.Spider):
+    name = 'beer'
 
     def start_requests(self):
-        url = 'https://www.zillow.com/homes/Brownsville,-TX_rb/'
-        yield scrapy.Request(url)
+        url = 'https://www.beerwulf.com/en-gb/c/mixedbeercases'
+        yield SplashRequest(url)
 
     def parse(self, response):
-        home_listing = response.css(".list-card-info")
-        for listing in home_listing:
+        products = response.css(".product.search-product.draught-product.notranslate.pack-product")
+        for item in products:
             yield{
-                'price': listing.css(".list-card-price").get(),
-                'address': listing.css(".list-card-addr").get()
+                'name': item.css("h4::text").get(),
+                'price': item.css("span.price::text").get()
             }
