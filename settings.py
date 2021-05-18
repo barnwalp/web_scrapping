@@ -1,7 +1,7 @@
 # Scrapy settings for nfl_player project
 BOT_NAME = 'spider_name'
 SPIDER_MODULES = ['spider_name.spiders']
-NEWSPIDER_MODULE = 'spider_name.spiders'
+NEWSPIDER_MODULE = 'nfl_player.spiders'
 ROBOTSTXT_OBEY = True
 DOWNLOAD_DELAY = 3
 COOKIES_ENABLED = False
