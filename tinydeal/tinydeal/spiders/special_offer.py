@@ -13,3 +13,8 @@ class SpecialOfferSpider(scrapy.Spider):
                 'discounted_price': product.css(".productSpecialPrice.fl::text").get(),
                 'original_price': product.css(".normalprice.fl::text").get()
             }
+
+        next_page = response.css(".nextPage::attr(href)").get()
+        if next_page is not None:
+            url = response.urljoin(next_page)
+            yield scrapy.Request(url=url, callback=self.parse)
