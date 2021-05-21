@@ -27,6 +27,9 @@ SPIDER_MIDDLEWARES = {
 DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
 HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
 
+# scrapy by default does not use utf-8 encoding for json files
+FEED_EXPORT_ENCODING = 'utf-8'
+
 ######################################################
 # ----------------------------------------
 # SCRAPY PROXY POOL - NOT WORKING
