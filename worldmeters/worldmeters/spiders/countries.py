@@ -1,4 +1,5 @@
 import scrapy
+# import logging
 
 
 class CountriesSpider(scrapy.Spider):
@@ -16,7 +17,7 @@ class CountriesSpider(scrapy.Spider):
             yield scrapy.Request(url=next_link, callback=self.parse_countries, meta={'country_name': name})
             # # instead of urljoin, one can also use response.follow
             # yield response.follow(url=link)
-        
+
     def parse_countries(self, response):
         name = response.request.meta['country_name']
         table = response.css("table.table.table-striped.table-bordered.table-hover.table-condensed.table-list")[0]
