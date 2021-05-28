@@ -1,6 +1,7 @@
 import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
+import re
 
 
 # This spider is inhereting from crawlspider class
@@ -32,11 +33,16 @@ class BestMoviesSpider(CrawlSpider):
 
     def parse_item(self, response):
         yield{
-            'title': response.css("h1::text").get(),
+            'title': self.normalize_whitespace(response.css("h1::text").get()),
             'year': response.css("#titleYear a::text").get(),
-            'duration': response.css("time::text").get(),
+            'duration': self.normalize_whitespace(response.css("time::text").get()),
             'genre': response.css(".subtext a::text").get(),
             'rating': response.css(".ratingValue span::text").get(),
             'movie_url': response.url
         }
         print(response.url)
+
+    def normalize_whitespace(self, str):
+        str = str.strip()
+        str = re.sub(r'\s+', ' ', str)
+        return str
