@@ -45,6 +45,8 @@ class BestMoviesSpider(CrawlSpider):
     def normalize_whitespace(self, str):
         # removing whitespace from front and tail of string
         str = str.strip()
+        # removing unicode chanracter from the strings
+        str = str.encode("ascii", "ignore").decode()
         # re.sub replace occurence of particular substring with another
         # substring. In this case occurence of 1 or more whitespce in between
         # words are replaced with one whitespace
