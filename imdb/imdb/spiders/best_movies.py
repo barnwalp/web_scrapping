@@ -43,6 +43,10 @@ class BestMoviesSpider(CrawlSpider):
         print(response.url)
 
     def normalize_whitespace(self, str):
+        # removing whitespace from front and tail of string
         str = str.strip()
+        # re.sub replace occurence of particular substring with another
+        # substring. In this case occurence of 1 or more whitespce in between
+        # words are replaced with one whitespace
         str = re.sub(r'\s+', ' ', str)
         return str
