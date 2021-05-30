@@ -22,6 +22,13 @@ class BestMoviesSpider(CrawlSpider):
         # argument is not passed as object is capable in extracting links
         # Rule(LinkExtractor(restrict_xpaths=('//a[@class="active"]')), callback='parse_item', follow=True),
         Rule(LinkExtractor(restrict_css=('.lister-item-header a')), callback='parse_item', follow=True),
+        # order of the Rule objects matter, if following line is placed first, then instead
+        # crawling all links in the page first, spider will move on to the next page
+        # the reason, call back method was not specified is that after visiting next
+        # page, first rule will be called with the callback method
+        # Rule(LinkExtractor(restrict_css=('.desc a'))),
+        # This is not working because css/xpath selectors are different than the first one
+        Rule(LinkExtractor(restrict_xpaths="(//a[@class='lister-page-next next-page'])[2]"), callback='parse_item', follow=True)
     )
 
     def parse_test(self, response):
