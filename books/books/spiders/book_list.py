@@ -16,6 +16,7 @@ class BookListSpider(CrawlSpider):
 
     rules = (
         Rule(LinkExtractor(restrict_css=('.image_container a')), callback='parse_item', follow=True),
+        Rule(LinkExtractor(restrict_css=('.next a'))),
     )
 
     def set_user_agent(self, request, spider):
