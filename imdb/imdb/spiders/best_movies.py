@@ -38,7 +38,7 @@ class BestMoviesSpider(CrawlSpider):
     )
 
     def set_user_agent(self, request, spider):
-        request.headers['User-Agnet'] = self.user_agent
+        request.headers['User-Agent'] = self.user_agent
         return request
 
     def parse_test(self, response):
