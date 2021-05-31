@@ -1,5 +1,6 @@
 import scrapy
 from scrapy_splash import SplashRequest
+from scrapy.shell import inspect_response
 
 
 class CoinSpider(scrapy.Spider):
@@ -29,4 +30,4 @@ class CoinSpider(scrapy.Spider):
             })
 
     def parse(self, response):
-        print(response.body)
+        inspect_response(response, self)
