@@ -1,6 +1,7 @@
 import scrapy
 from scrapy_splash import SplashRequest
 from scrapy.shell import inspect_response
+from scrapy.utils.response import open_in_browser
 
 
 class CoinSpider(scrapy.Spider):
@@ -30,4 +31,7 @@ class CoinSpider(scrapy.Spider):
             })
 
     def parse(self, response):
-        inspect_response(response, self)
+        # This will directly open the response in browser
+        open_in_browser(response)
+        # This will open a shell page for further tinkering 
+        # inspect_response(response, self)
