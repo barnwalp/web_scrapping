@@ -13,8 +13,11 @@ SPIDER_MODULES = ['jsquotescrape.spiders']
 NEWSPIDER_MODULE = 'jsquotescrape.spiders'
 
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'jsquotescrape (+http://www.yourdomain.com)'
+# scrapy-user-agents uses a file with 2200 user-agent strings
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+    'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+}
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
