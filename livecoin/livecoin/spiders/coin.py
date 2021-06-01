@@ -32,6 +32,11 @@ class CoinSpider(scrapy.Spider):
 
     def parse(self, response):
         # This will directly open the response in browser
-        open_in_browser(response)
+        # open_in_browser(response)
         # This will open a shell page for further tinkering 
-        # inspect_response(response, self)
+        inspect_response(response, self)
+        # for currency in response.css('.ReactVirtualized__Table__row.tableRow___3EtiS'):
+        #     yield{
+        #         'currency_pair': response.css('.logoBg___2u9Pr::text').get(),
+        #         'volume(24h)': response.css('.tableRowColumn___rDsl0:nth-child(2)::text').get()
+        #     }
