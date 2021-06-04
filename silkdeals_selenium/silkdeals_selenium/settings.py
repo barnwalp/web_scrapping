@@ -97,3 +97,6 @@ SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead 
 DOWNLOADER_MIDDLEWARES = {
     'scrapy_selenium.SeleniumMiddleware': 800
 }
+
+# scrapy by default does not use utf-8 encoding for json files
+FEED_EXPORT_ENCODING = 'utf-8'
