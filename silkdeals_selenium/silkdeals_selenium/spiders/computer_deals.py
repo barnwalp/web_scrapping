@@ -25,13 +25,23 @@ class ComputerDealsSpider(scrapy.Spider):
                 'store_name': link.css('.itemStore.bp-p-storeLink::text').get()
             }
 
+        next_page = response.css('a[data-role="next-page"]::attr(href)').get()
+        if next_page:
+            next_link = response.urljoin(next_page)
+            yield SeleniumRequest(
+                url=next_link,
+                wait_time=3,
+                callback=self.parse
+            )
+
     def normalize_whitespace(self, str):
         # removing whitespace from front and tail of string
-        str = str.strip()
-        # removing unicode chanracter from the strings
-        str = str.encode("ascii", "ignore").decode()
-        # re.sub replace occurence of particular substring with another
-        # substring. In this case occurence of 1 or more whitespce in between
-        # words are replaced with one whitespace
-        str = re.sub(r'\s+', ' ', str)
+        if str is not None:
+            str = str.strip()
+            # removing unicode chanracter from the strings
+            str = str.encode("ascii", "ignore").decode()
+            # re.sub replace occurence of particular substring with another
+            # substring. In this case occurence of 1 or more whitespce in between
+            # words are replaced with one whitespace
+            str = re.sub(r'\s+', ' ', str)
         return str
