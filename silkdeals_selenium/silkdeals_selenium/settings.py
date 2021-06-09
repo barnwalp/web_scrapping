@@ -65,13 +65,11 @@ ROBOTSTXT_OBEY = True
 ITEM_PIPELINES = {
     # Insider this, you should put all the pipeline you want to execute by
     # spcifiying the path of each one and providing priority
-   'silkdeals_selenium.pipelines.SilkdealsSeleniumPipeline': 300,
+   'silkdeals_selenium.pipelines.MongodbPipeline': 300,
    # lower number means higher priority. This will ensure that before
    # saving scrapped data in a database, duplicates values will be filtered
 #    'silkdeals_selenium.pipelines.FilterDuplicate': 100,
 }
-
-MONGO_URI = "Hello World"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
