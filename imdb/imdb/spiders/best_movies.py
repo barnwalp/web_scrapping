@@ -56,7 +56,7 @@ class BestMoviesSpider(CrawlSpider):
             'genre': response.css(".subtext a::text").get(),
             'rating': response.css(".ratingValue span::text").get(),
             'movie_url': response.url,
-            'user-agent': response.request.headers['User-Agent']
+            # 'user-agent': response.request.headers['User-Agent']
         }
         print(response.url)
 
