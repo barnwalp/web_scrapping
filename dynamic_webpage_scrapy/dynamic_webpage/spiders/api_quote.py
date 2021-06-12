@@ -22,6 +22,9 @@ class ApiQuote(scrapy.Spider):
                 'tag': value['tags'],
                 'quote': value['text'],
             }
-        self.count += 1
-        next_link = self.domain_url + str(self.count)
-        yield scrapy.Request(url=next_link, callback=self.parse)
+        # check if the next page is available
+        has_next = data['has_next']
+        if has_next:
+            self.count += 1
+            next_link = self.domain_url + str(self.count)
+            yield scrapy.Request(url=next_link, callback=self.parse)
