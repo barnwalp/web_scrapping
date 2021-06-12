@@ -21,6 +21,8 @@ class ApiSchool(scrapy.Spider):
         for elem in tree.iter():
             elemList.append(elem.tag)
         
-        print(elemList)
-
-
+        # print(elemList)
+        for school in tree.findall('{http://schemas.datacontract.org/2004/07/doe.EducationDirectory.Web.Models}SchoolsForListDto/{http://schemas.datacontract.org/2004/07/doe.EducationDirectory.Web.Models}SchoolName'):
+            yield{
+                'school_name': school.text,
+            }
