@@ -15,6 +15,10 @@ class ApiQuote(scrapy.Spider):
             })
 
     def parse(self, response):
+        # spider can also be closed by using status_code
+        # from scrapy.exceptions import CloseSpider
+        # if response.status == 500:
+        #     raise CloseSpider('Reached last page...')
         data = json.loads(response.body)
         for value in data['quotes']:
             yield{
@@ -28,3 +32,4 @@ class ApiQuote(scrapy.Spider):
             self.count += 1
             next_link = self.domain_url + str(self.count)
             yield scrapy.Request(url=next_link, callback=self.parse)
+        
