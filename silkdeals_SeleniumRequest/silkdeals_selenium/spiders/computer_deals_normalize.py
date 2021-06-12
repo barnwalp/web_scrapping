@@ -6,7 +6,7 @@ import re
 
 
 class ComputerDealsSpider(scrapy.Spider):
-    name = 'computer_deals'
+    name = 'computer_deals_normalize'
 
     def start_requests(self):
         yield SeleniumRequest(

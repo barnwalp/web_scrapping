@@ -2,7 +2,7 @@ import scrapy
 
 
 class SpecialOfferSpider(scrapy.Spider):
-    name = 'special_offer'
+    name = 'user-agent_in_Request'
     start_urls = ['https://web.archive.org/web/20190225123327/https://www.tinydeal.com/specials.html']
     # user-agent can also be added in this way
     def start_requests(self):
