@@ -1,7 +1,6 @@
 import scrapy
-from scrapy.utils.response import open_in_browser
-import xmltodict
-
+import json
+from xml.etree import ElementTree as ET
 
 class ApiSchool(scrapy.Spider):
     name = "apischool"
@@ -14,6 +13,14 @@ class ApiSchool(scrapy.Spider):
             })
 
     def parse(self, response):
-        # open_in_browser(response)
-        print(type(response))
-        print(xmltodict.parse(response))
+        xml_data = response.body
+        tree = ET.fromstring(xml_data)
+
+        # getting all tags in elemList
+        elemList = []
+        for elem in tree.iter():
+            elemList.append(elem.tag)
+        
+        print(elemList)
+
+
