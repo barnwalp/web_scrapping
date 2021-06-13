@@ -10,6 +10,9 @@ class LoginQuoteSpider(scrapy.Spider):
         # csrf_token is dynmaically changed each time
         # so it need to be taken from the portal
         csrf_token = response.css('input[name="csrf_token"]::attr(value)').get()
+        # if form does required javascript, then replace FormRequest with
+        # Splash FormRequest which also have the same method .from_response
+        # from scrapy_splash import SplashFormRequest
         yield FormRequest.from_response(
             response,
             formcss='form',
