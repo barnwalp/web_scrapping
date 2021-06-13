@@ -7,6 +7,8 @@ class LoginQuoteSpider(scrapy.Spider):
     start_urls = ['http://quotes.toscrape.com/login']
 
     def parse(self, response):
+        # csrf_token is dynmaically changed each time
+        # so it need to be taken from the portal
         csrf_token = response.css('input[name="csrf_token"]::attr(value)').get()
         yield FormRequest.from_response(
             response,
