@@ -13,16 +13,21 @@ const getQuotes = async () => {
 		waitUntil: 'domcontentloaded'
 	});
 
-	const quotes = await page.evaluate(() => {
-		const quoteList = document.querySelectorAll(".quote");
-		return Array.from(quoteList).map((quote) => {
-			const text = quote.querySelector('.text').innerText;
-			const author = quote.querySelector('.author').innerText;
-			return { text, author }
+	while(await page.$('.next a')) {
+		const quotes = await page.evaluate(() => {
+			const quoteList = document.querySelectorAll(".quote");
+			return Array.from(quoteList).map((quote) => {
+				const text = quote.querySelector('.text').innerText;
+				const author = quote.querySelector('.author').innerText;
+				return { text, author }
+			})
 		})
-	})
-
-	console.log(quotes);
+		console.log(quotes);
+		await page.click('.next a');
+		// await page.evaluate(() => {
+		// 	document.querySelector('.next a').click();
+		// })
+	}
 
 	await browser.close();
 }
